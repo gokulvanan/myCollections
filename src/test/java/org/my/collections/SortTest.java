@@ -3,7 +3,10 @@ package org.my.collections;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
+
+import org.my.collections.sorting.BUMergeSort;
 import org.my.collections.sorting.InsertionSort;
+import org.my.collections.sorting.MergeSort;
 import org.my.collections.sorting.Sort;
 import org.my.collections.utils.SortUtils;
 
@@ -38,14 +41,40 @@ public class SortTest extends TestCase{
 		String[] data ={"te","we","aed"};
 		data = (String[]) s.sort(data);
 		assertTrue( SortUtils.isSorted(data)); 
-		
 	}
 	
-	public void testIndexSort(){
+	public void testInsertionIndexSort(){
 		Sort s  = InsertionSort.getInstance();
 		String[] data ={"te","we","aed"};
 		Integer [] indx = s.indexSort(data);
-		String f = data[indx[0]];
-		for(int i=1; i<indx.length; i++) assertTrue(f.compareTo(data[indx[i]])<=0);
+		assertTrue(SortUtils.isIndexSorted(data, indx));
+	}
+	
+	public void testMergeSort(){
+		Sort s = MergeSort.getInstance();
+		Integer[] input = SortUtils.generateRandomInput(2000);
+		input = (Integer[]) s.sort(input);
+		assertTrue( SortUtils.isSorted(input));
+	}
+	
+	public void testMergeIndexSort(){
+		Sort s = MergeSort.getInstance();
+		Integer[] input = SortUtils.generateRandomInput(2000);
+		Integer[] indx = (Integer[]) s.indexSort(input);
+		assertTrue( SortUtils.isIndexSorted(input, indx));
+	}
+	
+	public void testBUMergeSort(){
+		Sort s = BUMergeSort.getInstance();
+		Integer[] input = SortUtils.generateRandomInput(20);
+		input = (Integer[]) s.sort(input);
+		assertTrue( SortUtils.isSorted(input));
+	}
+	
+	public void testBUMergeIndexSort(){
+		Sort s = BUMergeSort.getInstance();
+		Integer[] input = SortUtils.generateRandomInput(20);
+		input = (Integer[]) s.sort(input);
+		assertTrue( SortUtils.isSorted(input));
 	}
 }

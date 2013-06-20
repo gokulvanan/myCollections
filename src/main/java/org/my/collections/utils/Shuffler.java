@@ -1,9 +1,13 @@
-package org.my.collection.utils;
+package org.my.collections.utils;
 
 import java.util.Random;
 
-
-public class RandomUtils {
+/**
+ * Class that implements Knut-Shuffle Algo
+ * @author Gokulvanan
+ *
+ */
+public class Shuffler {
 
 	private static Random random;    // pseudo-random number generator
 	private static long seed;        // pseudo-random number generator seed
@@ -13,12 +17,13 @@ public class RandomUtils {
 		random = new Random(seed);
 	}
 	
-	public static void shuffle(Object[] data){
+	public static Object[] shuffle(Object[] data){
 		int N = data.length;
-		for(int i = 0; i < N; i++){
-			int r = random.nextInt(i+1);// Return an integer uniformly between 0 and N-1.
+		for(int i=N-1; i>0; i--){
+			int r = random.nextInt(i); // return an integer between 0 and i
 			swap(data,i,r);
 		}
+		return data;
 	}
 	
 	private static void swap(Object[] data, int i, int j){

@@ -46,14 +46,14 @@ public class MergeSort extends Sort{
 	@Override
 	public Integer[] indexSort(Comparable[] data) {
 		int len = data.length;
-		Integer [] index = new Integer [len];
+		Integer [] index = initIndexArray(len);
 		Integer [] buff =  new Integer[len];
 		recursiveSort(data,buff,0,len,index);
 		return index;
 	}
 
 	private void recursiveSort(Comparable[] data, Integer[] buff, int i, int len, Integer[] index) {
-		if(i+CUT_OFF<len){
+		if(i+CUT_OFF>len){
 			index = InsertionSort.getInstance().indexSort(data,index,i,len);
 			return;
 		}
@@ -61,7 +61,7 @@ public class MergeSort extends Sort{
 		recursiveSort(data, buff, i, mid,index);
 		recursiveSort(data, buff, mid, len,index);
 		if (!lesser(data[index[mid+1]], data[index[mid]])) return; //avoid merge  if already sorted
-		merge(data,buff,i,len,mid,index);
+		else merge(data,buff,i,len,mid,index);
 	}
 
 	private void merge(Comparable[] data, Integer[] buff, int low, int high, int mid,Integer[] index) {
@@ -76,7 +76,7 @@ public class MergeSort extends Sort{
 	}
 
 	private void recursiveSort(Comparable[] data, Comparable[] buff, int i, int len) {
-		if(i+CUT_OFF<len){
+		if(i+CUT_OFF>len){
 			data = InsertionSort.getInstance().sort(data,i,len);
 			return;
 		}
@@ -99,7 +99,7 @@ public class MergeSort extends Sort{
 	}
 
 	private void recursiveSort(Object[] data, Object[] buff, int i, int len, Comparator<Comparable> c) {
-		if(i+CUT_OFF<len){
+		if(i+CUT_OFF>len){
 			data = InsertionSort.getInstance().sort(data,i,len,c);
 			return;
 		}

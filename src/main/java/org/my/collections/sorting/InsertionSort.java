@@ -58,7 +58,7 @@ public class InsertionSort extends Sort{
 		
 	}
 
-	public Object[] sort(Object[] data, int start, int len, Comparator<Comparable> c) {
+	public Object[] sort(Object[] data, int start, int len, Comparator c) {
 		for(int i=start; i<len; i++){
 			for(int j=i-1; j>=0 && lesser(data[j+1],data[j],c); j--)	
 				swap(data,j+1,j);

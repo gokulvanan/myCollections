@@ -69,7 +69,7 @@ public class MergeSort extends Sort{
 		int i = low, j = mid+1;
 		for(int k=low; k < high; k++){
 			if(i > mid)  									index[k] = buff[j++];
-			else if(j < mid) 								index[k] = buff[i++];
+			else if(j > high) 								index[k] = buff[i++];
 			else if(lesser(data[buff[j]],data[buff[i]])) 	index[k] = buff[j++];
 			else 							 				index[k] = buff[i++];
 		}
@@ -92,7 +92,7 @@ public class MergeSort extends Sort{
 		int i = low, j = mid+1;
 		for(int k=low; k < high; k++){
 			if(i > mid)  							data[k] = buff[j++];
-			else if(j < mid) 						data[k] = buff[i++];
+			else if(j > high) 						data[k] = buff[i++];
 			else if(lesser(buff[j],buff[i])) 		data[k] = buff[j++];
 			else 							 		data[k] = buff[i++];
 		}
@@ -115,7 +115,7 @@ public class MergeSort extends Sort{
 		int i = low, j = mid+1;
 		for(int k=low; k < high; k++){
 			if(i > mid)  							data[k] = buff[j++];
-			else if(j < mid) 						data[k] = buff[i++];
+			else if(j > high) 						data[k] = buff[i++];
 			else if(lesser(buff[j],buff[i],c)) 		data[k] = buff[j++];
 			else 							 		data[k] = buff[i++];
 		}

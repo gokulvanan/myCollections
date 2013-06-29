@@ -4,7 +4,8 @@ import java.util.Comparator;
 
 /**
  * Guaranteed NLogN performance
- * Takes space proportional to N and 2N for index sorts
+ * Takes extra space proportional to N and 2N for index sorts (Not optimal in space usage)
+ * Works well for partially sorted array 
  * There is overhead of creation and initialization of sub arrays in merge sort.. 
  * for items less than 20-30 elements.. use insertion sort..
  * This code defaults to insertion sort for less than 10 items.. 
@@ -13,7 +14,7 @@ import java.util.Comparator;
  * @author Gokulvanan
  * @param <Comparable>
  */
-public class MergeSort extends Sort{
+public class MergeSort extends Merge{
 
 	private static final int CUT_OFF = 10;
 	//Singelton
@@ -64,16 +65,7 @@ public class MergeSort extends Sort{
 		else merge(data,buff,i,len,mid,index);
 	}
 
-	private void merge(Comparable[] data, Integer[] buff, int low, int high, int mid,Integer[] index) {
-		for(int i=low; i<high; i++) buff[i] = index[i];
-		int i = low, j = mid+1;
-		for(int k=low; k < high; k++){
-			if(i > mid)  									index[k] = buff[j++];
-			else if(j > high) 								index[k] = buff[i++];
-			else if(lesser(data[buff[j]],data[buff[i]])) 	index[k] = buff[j++];
-			else 							 				index[k] = buff[i++];
-		}
-	}
+	
 
 	private void recursiveSort(Comparable[] data, Comparable[] buff, int i, int len) {
 		if(i+CUT_OFF>len){
@@ -87,17 +79,6 @@ public class MergeSort extends Sort{
 		merge(data,buff,i,len,mid);
 	}
 
-	private void merge(Comparable[] data, Comparable[] buff, int low, int high, int mid) {
-		for(int i=low; i<high; i++) buff[i] = data[i];
-		int i = low, j = mid+1;
-		for(int k=low; k < high; k++){
-			if(i > mid)  							data[k] = buff[j++];
-			else if(j > high) 						data[k] = buff[i++];
-			else if(lesser(buff[j],buff[i])) 		data[k] = buff[j++];
-			else 							 		data[k] = buff[i++];
-		}
-	}
-
 	private void recursiveSort(Object[] data, Object[] buff, int i, int len, Comparator<Comparable> c) {
 		if(i+CUT_OFF>len){
 			data = InsertionSort.getInstance().sort(data,i,len,c);
@@ -108,16 +89,5 @@ public class MergeSort extends Sort{
 		recursiveSort(data, buff, mid, len,c);
 		if (!lesser(data[mid+1], data[mid],c)) return; //avoid merge  if already sorted
 		merge(data,buff,i,len,mid,c);
-	}
-
-	private void merge(Object[] data, Object[] buff, int low, int high, int mid,Comparator<Comparable> c) {
-		for(int i=low; i<=high; i++) buff[i] = data[i];
-		int i = low, j = mid+1;
-		for(int k=low; k < high; k++){
-			if(i > mid)  							data[k] = buff[j++];
-			else if(j > high) 						data[k] = buff[i++];
-			else if(lesser(buff[j],buff[i],c)) 		data[k] = buff[j++];
-			else 							 		data[k] = buff[i++];
-		}
 	}
 }

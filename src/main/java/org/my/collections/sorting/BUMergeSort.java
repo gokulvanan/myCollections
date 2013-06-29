@@ -9,7 +9,7 @@ import java.util.Comparator;
  * @author Gokulvanan
  * @param <Comparable>
  */
-public class BUMergeSort extends Sort{
+public class BUMergeSort extends Merge{
 
 	private static final int CUT_OFF = 10;
 	//Singelton
@@ -50,7 +50,7 @@ public class BUMergeSort extends Sort{
 	@Override
 	public Integer[] indexSort(Comparable[] data) {
 		int N = data.length;
-		Integer[] index = new Integer[N];
+		Integer[] index = initIndexArray(data.length);
 		Integer[] buff = new Integer[N];
 		for(int sz=1; sz < N; sz+=sz)	{
 			boolean cutOff=(2*sz<CUT_OFF);
@@ -59,39 +59,5 @@ public class BUMergeSort extends Sort{
 			}
 		}
 		return index;
-	}
-
-	private void merge(Comparable[] data, Comparable[] buff, int low, int high, int mid) {
-		for(int i=low; i<=high; i++) buff[i] = data[i];
-		int i = low, j = mid+1;
-		for(int k=low; k <= high; k++){
-			if(i > mid)  							data[k] = buff[j++];
-			else if(j > high) 						data[k] = buff[i++];
-			else if(lesser(buff[j],buff[i])) 		data[k] = buff[j++];
-			else 							 		data[k] = buff[i++];
-		}
-	}
-	
-	
-	private void merge(Comparable[] data, Integer[] buff, int low, int high, int mid,Integer[] index) {
-		for(int i=low; i<=high; i++) buff[i] = index[i];
-		int i = low, j = mid+1;
-		for(int k=low; k <= high; k++){
-			if(i > mid)  									index[k] = buff[j++];
-			else if(j > high) 								index[k] = buff[i++];
-			else if(lesser(data[buff[j]],data[buff[i]])) 	index[k] = buff[j++];
-			else 							 				index[k] = buff[i++];
-		}
-	}
-
-	private void merge(Object[] data, Object[] buff, int low, int high, int mid,Comparator c) {
-		for(int i=low; i<=high; i++) buff[i] = data[i];
-		int i = low, j = mid+1;
-		for(int k=low; k <= high; k++){
-			if(i > mid)  							data[k] = buff[j++];
-			else if(j > high) 						data[k] = buff[i++];
-			else if(lesser(buff[j],buff[i],c)) 		data[k] = buff[j++];
-			else 							 		data[k] = buff[i++];
-		}
 	}
 }

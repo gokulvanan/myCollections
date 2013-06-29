@@ -21,7 +21,7 @@ public class ShellSort extends Sort{
 	}
 	
 	@Override
-	public Comparable[] sort(Comparable[] data) {
+	public void sort(Comparable[] data) {
 		int h = computeH(data.length);
 		while(h >=1){
 			for(int i=h; i<data.length; i++){
@@ -30,12 +30,11 @@ public class ShellSort extends Sort{
 			}
 			h = h/3;
 		}
-		return data;
 	}
 
 
 	@Override
-	public Object[] sort(Object[] data, Comparator c) {
+	public void sort(Object[] data, Comparator c) {
 		int h = computeH(data.length);
 		while(h >=1){
 			for(int i=h; i<data.length; i++){
@@ -44,7 +43,6 @@ public class ShellSort extends Sort{
 			}
 			h = h/3;
 		}
-		return data;
 	}
 
 	@Override
@@ -61,11 +59,52 @@ public class ShellSort extends Sort{
 		}
 		return index;
 	}
-	
 
+	@Override
+	public void reverseSort(Comparable[] data) {
+		int h = computeH(data.length);
+		while(h >=1){
+			for(int i=h; i<data.length; i++){
+				for(int j=i; j>=h && greater(data[j],data[j-h]); j-=h)
+					swap(data, j, j-h);
+			}
+			h = h/3;
+		}
+	}
+
+	@Override
+	public Integer[] indexSort(Object[] data, Comparator c) {
+		int len=data.length;
+		int h = computeH(len);
+		Integer[] index = initIndexArray(len);
+		while(h >=1){
+			for(int i=h; i<data.length; i++){
+				for(int j=i; j>=h && lesser(data[index[j]],data[index[j-h]],c); j-=h)
+					swap(index, j, j-h);
+			}
+			h = h/3;
+		}
+		return index;
+	}
+
+	@Override
+	public Integer[] reveseIndexSort(Comparable[] data) {
+		int len=data.length;
+		int h = computeH(len);
+		Integer[] index = initIndexArray(len);
+		while(h >=1){
+			for(int i=h; i<data.length; i++){
+				for(int j=i; j>=h && greater(data[index[j]],data[index[j-h]]); j-=h)
+					swap(index, j, j-h);
+			}
+			h = h/3;
+		}
+		return index;
+	}
+	
 	private int computeH(int N) {
 		int h = 1;
 		while (h < N/3) h = 3*h+1;
 		return h;
-	}	
+	}
 }

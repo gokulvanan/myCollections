@@ -25,33 +25,60 @@ public class InsertionSort extends Sort{
 	}
 	
 	@Override
-	public Comparable[] sort(Comparable[] data) {
-		return sort(data,0,data.length);
+	public void sort(Comparable[] data) {
+		sort(data,0,data.length,false);
 	}
 
 	@Override
-	public Object[] sort(Object[] data, Comparator c) {
-		return sort(data,0,data.length,c);
+	public void sort(Object[] data, Comparator c) {
+		sort(data,0,data.length,c);
 	}
 
 	@Override
 	public Integer[] indexSort(Comparable[] data) {
 		int len=data.length;
 		Integer[] index = initIndexArray(len);
-		return indexSort(data, index, 0, len);
+		return indexSort(data, index, 0, len,false);
 	}
 
-	public Integer[] indexSort(Comparable[] data, Integer[] index, int start, int len) {
+	@Override
+	public void reverseSort(Comparable[] data) {
+		sort(data,0,data.length,true);
+	}
+
+	@Override
+	public Integer[] indexSort(Object[] data, Comparator c) {
+		int len=data.length;
+		Integer[] index = initIndexArray(len);
+		return indexSort(data, index, 0, len,c);
+	}
+
+	@Override
+	public Integer[] reveseIndexSort(Comparable[] data) {
+		int len=data.length;
+		Integer[] index = initIndexArray(len);
+		return indexSort(data, index, 0, len,true);
+	}
+	
+	public Integer[] indexSort(Object[] data, Integer[] index, int start, int len,Comparator c) {
 		for(int i=start; i<len; i++){
-			for(int j=i-1; j>=0 && lesser(data[index[j+1]], data[index[j]]); j--)
+			for(int j=i-1; j>=0 && lesser(data[index[j+1]], data[index[j]],c); j--)
+				swap(index, j+1, j);
+		}
+		return index;
+	}
+	
+	public Integer[] indexSort(Comparable[] data, Integer[] index, int start, int len,boolean reverse) {
+		for(int i=start; i<len; i++){
+			for(int j=i-1; j>=0 && (reverse ? greater(data[index[j+1]], data[index[j]]) :lesser(data[index[j+1]], data[index[j]])); j--)
 				swap(index, j+1, j);
 		}
 		return index;
 	}
 
-	public Comparable[] sort(Comparable[] data, int start, int len) {
+	public Comparable[] sort(Comparable[] data, int start, int len, boolean reverse) {
 		for(int i=start; i<len; i++){
-			for(int j=i-1; j>=0 && lesser(data[j+1],data[j]); j--)	
+			for(int j=i-1; j>=0 && (reverse ? greater(data[j+1],data[j]) :lesser(data[j+1],data[j])); j--)	
 				swap(data, j+1, j);
 		}
 		return data;

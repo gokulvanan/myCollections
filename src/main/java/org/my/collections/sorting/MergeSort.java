@@ -3,7 +3,7 @@ package org.my.collections.sorting;
 import java.util.Comparator;
 
 /**
- * Guaranteed NLogN performance
+ * Guaranteed NLogN performance irrespective of duplicates
  * Takes extra space proportional to N and 2N for index sorts (Not optimal in space usage)
  * Works well for partially sorted array 
  * There is overhead of creation and initialization of sub arrays in merge sort.. 
@@ -28,20 +28,18 @@ public class MergeSort extends Merge{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Comparable[] sort(Comparable[] data) {
+	public void sort(Comparable[] data) {
 		int len = data.length;
 		Comparable[] buff = (Comparable[]) new Comparable[len];
-		recursiveSort(data,buff,0,len);
-		return data;
+		recursiveSort(data,buff,0,len,false);
 	}
 
 
 	@Override
-	public Object[] sort(Object[] data, Comparator c) {
+	public void sort(Object[] data, Comparator c) {
 		int len = data.length;
 		Object[] buff =  new Object[len];
 		recursiveSort(data,buff,0,len,c);
-		return data;
 	}
 
 	@Override
@@ -49,37 +47,76 @@ public class MergeSort extends Merge{
 		int len = data.length;
 		Integer [] index = initIndexArray(len);
 		Integer [] buff =  new Integer[len];
-		recursiveSort(data,buff,0,len,index);
+		recursiveSort(data,buff,0,len,index,false);
 		return index;
 	}
 
-	private void recursiveSort(Comparable[] data, Integer[] buff, int i, int len, Integer[] index) {
+
+	@Override
+	public void reverseSort(Comparable[] data) {
+		int len = data.length;
+		Comparable[] buff = (Comparable[]) new Comparable[len];
+		recursiveSort(data,buff,0,len,true);
+	}
+
+	@Override
+	public Integer[] indexSort(Object[] data, Comparator c) {
+		int len = data.length;
+		Integer [] index = initIndexArray(len);
+		Integer [] buff =  new Integer[len];
+		recursiveSort(data,buff,0,len,index,c);
+		return index;
+	}
+
+	@Override
+	public Integer[] reveseIndexSort(Comparable[] data) {
+		int len = data.length;
+		Integer [] index = initIndexArray(len);
+		Integer [] buff =  new Integer[len];
+		recursiveSort(data,buff,0,len,index,true);
+		return index;
+	}
+	
+	private void recursiveSort(Comparable[] data, Integer[] buff, int i, int len, Integer[] index, boolean reverse) {
 		if(i+CUT_OFF>len){
-			index = InsertionSort.getInstance().indexSort(data,index,i,len);
+			index = InsertionSort.getInstance().indexSort(data,index,i,len,reverse);
 			return;
 		}
 		int mid = (i + len) / 2;
-		recursiveSort(data, buff, i, mid,index);
-		recursiveSort(data, buff, mid, len,index);
-		if (!lesser(data[index[mid+1]], data[index[mid]])) return; //avoid merge  if already sorted
-		else merge(data,buff,i,len,mid,index);
+		recursiveSort(data, buff, i, mid,index,reverse);
+		recursiveSort(data, buff, mid, len,index,reverse);
+		if ((reverse && lesser(data[index[mid+1]], data[index[mid]])) ||
+			(!reverse && greater(data[index[mid+1]], data[index[mid]]))) return; //avoid merge  if already sorted
+		else merge(data,buff,i,len,mid,index,reverse);
+	}
+	
+	private void recursiveSort(Object[] data, Integer[] buff, int i, int len, Integer[] index, Comparator c) {
+		if(i+CUT_OFF>len){
+			index = InsertionSort.getInstance().indexSort(data,index,i,len,c);
+			return;
+		}
+		int mid = (i + len) / 2;
+		recursiveSort(data, buff, i, mid,index,c);
+		recursiveSort(data, buff, mid, len,index,c);
+		if (lesser(data[index[mid+1]], data[index[mid]],c)) return; //avoid merge  if already sorted
+		else merge(data,buff,i,len,mid,index,c);
 	}
 
 	
 
-	private void recursiveSort(Comparable[] data, Comparable[] buff, int i, int len) {
+	private void recursiveSort(Comparable[] data, Comparable[] buff, int i, int len,boolean reverse) {
 		if(i+CUT_OFF>len){
-			data = InsertionSort.getInstance().sort(data,i,len);
+			data = InsertionSort.getInstance().sort(data,i,len,reverse);
 			return;
 		}
 		int mid = (i + len) / 2;
-		recursiveSort(data, buff, i, mid);
-		recursiveSort(data, buff, mid, len);
+		recursiveSort(data, buff, i, mid,reverse);
+		recursiveSort(data, buff, mid, len,reverse);
 		if (!lesser(data[mid+1], data[mid])) return; //avoid merge  if already sorted
-		merge(data,buff,i,len,mid);
+		merge(data,buff,i,len,mid,reverse);
 	}
 
-	private void recursiveSort(Object[] data, Object[] buff, int i, int len, Comparator<Comparable> c) {
+	private void recursiveSort(Object[] data, Object[] buff, int i, int len, Comparator c) {
 		if(i+CUT_OFF>len){
 			data = InsertionSort.getInstance().sort(data,i,len,c);
 			return;
@@ -90,4 +127,5 @@ public class MergeSort extends Merge{
 		if (!lesser(data[mid+1], data[mid],c)) return; //avoid merge  if already sorted
 		merge(data,buff,i,len,mid,c);
 	}
+
 }

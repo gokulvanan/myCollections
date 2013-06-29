@@ -8,6 +8,7 @@ import org.my.collections.sorting.BUMergeSort;
 import org.my.collections.sorting.InsertionSort;
 import org.my.collections.sorting.MergeSort;
 import org.my.collections.sorting.QuickSort;
+import org.my.collections.sorting.QuickSort.TYPE;
 import org.my.collections.sorting.Sort;
 import org.my.collections.utils.SortUtils;
 
@@ -40,7 +41,7 @@ public class SortTest extends TestCase{
 	{
 		Sort s  = InsertionSort.getInstance();
 		String[] data ={"te","we","aed"};
-		data = (String[]) s.sort(data);
+		s.sort(data);
 		assertTrue( SortUtils.isSorted(data)); 
 	}
 
@@ -54,7 +55,7 @@ public class SortTest extends TestCase{
 	public void testMergeSort(){
 		Sort s = MergeSort.getInstance();
 		Integer[] input = SortUtils.generateRandomInput(2000);
-		input = (Integer[]) s.sort(input);
+		s.sort(input);
 		assertTrue( SortUtils.isSorted(input));
 	}
 
@@ -68,7 +69,7 @@ public class SortTest extends TestCase{
 	public void testBUMergeSort(){
 		Sort s = BUMergeSort.getInstance();
 		Integer[] input = SortUtils.generateRandomInput(20);
-		input = (Integer[]) s.sort(input);
+		s.sort(input);
 		assertTrue( SortUtils.isSorted(input));
 	}
 
@@ -82,12 +83,26 @@ public class SortTest extends TestCase{
 	public void testQuickSort(){
 		Sort s = QuickSort.getInstance();
 		Integer[] input = SortUtils.generateRandomInput(2000);
-		input = (Integer[]) s.sort(input);
+		s.sort(input);
 		assertTrue( SortUtils.isSorted(input));
 	}
 
 	public void testQuickIndexSort(){
 		Sort s = QuickSort.getInstance();
+		Integer[] input = SortUtils.generateRandomInput(2000);
+		Integer[] indx = (Integer[]) s.indexSort(input);
+		assertTrue( SortUtils.isIndexSorted(input,indx));
+	}
+	
+	public void testOldQuickSort(){
+		Sort s = QuickSort.getInstance(TYPE.NORMAL);
+		Integer[] input = SortUtils.generateRandomInput(2000);
+		s.sort(input);
+		assertTrue( SortUtils.isSorted(input));
+	}
+
+	public void testOldQuickIndexSort(){
+		Sort s = QuickSort.getInstance(TYPE.NORMAL);
 		Integer[] input = SortUtils.generateRandomInput(2000);
 		Integer[] indx = (Integer[]) s.indexSort(input);
 		assertTrue( SortUtils.isIndexSorted(input,indx));

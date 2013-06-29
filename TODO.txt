@@ -1,13 +1,11 @@
-1) Complete implementation of List Interface
-2) Write test case and bench mark peformance of existing datastructures
-3) Add code for ShellSort and Shuffling
-4) Add code for Merget sort and its variants + quick sort and variants
-5) Add code for heap sort and Binary Heap +PQ datastructure
-6) Work on indexed PQ structure
-7) Write Performance test cases for all sorting logic including PQ structure
-8) Symbol table 
-9) Binary Search Tree, Balanced, KD Tree,
-10) HashTables.. 
-11)Graphs
-12)Strings
-13)Compression
+- Complete implementation of List and Array Queue Interface
+- Write test case for UF, Stack ,Queue and Bag
+- Add code for heap sort and Binary Heap +PQ datastructure
+- Work on indexed PQ structure
+- Write Performance test cases for all sorting logic including PQ structure
+- Symbol table 
+- Binary Search Tree, Balanced, KD Tree,
+- HashTables.. 
+- Graphs
+- Strings
+- Compression

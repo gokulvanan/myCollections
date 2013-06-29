@@ -4,8 +4,6 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.my.collections.sorting.InsertionSort;
-import org.my.collections.sorting.Sort;
 import org.my.collections.utils.Shuffler;
 import org.my.collections.utils.SortUtils;
 

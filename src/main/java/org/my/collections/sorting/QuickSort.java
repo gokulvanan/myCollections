@@ -13,7 +13,7 @@ import org.my.collections.utils.Shuffler;
  * 39% more compares than Merget sort but lesser data movement than Merge causes quicker sorting
  * Not the best sort in case of many duplicate data
  * Cut offs to insertion sort for less than 10 items
- * Two types of quickSort Logic.  NORMAL, THREE_WAY - median is under construction(slightly better performance in presence duplicates)
+ * Two types of quickSort Logic.  NORMAL, THREE_WAY -(slightly better performance in presence duplicates)
  * @author Gokulvanan
  *
  */

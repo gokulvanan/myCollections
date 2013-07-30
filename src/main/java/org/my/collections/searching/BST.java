@@ -1,5 +1,8 @@
 package org.my.collections.searching;
 
+import org.my.collections.LinkedQueue;
+import org.my.collections.Queue;
+
 public class BST<Key extends Comparable<Key>,Value> implements OrderedOperations<Key,Value>{
 
 	private class Node{
@@ -50,10 +53,17 @@ public class BST<Key extends Comparable<Key>,Value> implements OrderedOperations
 	}
 
 	public Iterable<Key> keys() {
-		// TODO Auto-generated method stub
-		return null;
+		Queue<Key> q = new LinkedQueue<Key>();
+		inorder(root,q);
+		return q;
 	}
 
+	private void inorder(Node x, Queue<Key> q){
+		if(x == null) return;
+		inorder(x.left,q);
+		q.enque(x.key);
+		inorder(x.right,q);
+	}
 	private Node put(Node n, Key k, Value v) {
 		if(n == null) return new Node(k, v);
 		int cmp = k.compareTo(n.key);
@@ -120,23 +130,43 @@ public class BST<Key extends Comparable<Key>,Value> implements OrderedOperations
 		else return t;
 	}
 	public int rank(Key k) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rank(root,k);
+	}
+	
+	private int rank(Node x,Key k){
+		if(x == null) return 0;
+		int cmp = k.compareTo(x.key);
+		if(cmp == 0) 		return x.left.count;
+		else if(cmp > 0) 	return 1+x.left.count+rank(x.right,k);
+		else				return rank(x.left,k);
 	}
 
 	public Key select(int rank) {
-		// TODO Auto-generated method stub
-		return null;
+		return select(root,rank);
 	}
 
+	private Key select(Node x, int rank){
+		if(x == null) return null;
+		if(rank == x.count) 		return  x.key;
+		else if (rank < x.count) 	return select(x.left,rank);
+		else 						return select(x.right,rank);
+	}
 	public void deleteMin() {
-		// TODO Auto-generated method stub
-		
+		Node n = root;
+		while(n.left != null){
+			n.count -=1;// reduce size by 1
+			n = n.left;
+		}
+		n = n.right;
 	}
 
 	public void deleteMax() {
-		// TODO Auto-generated method stub
-		
+		Node n = root;
+		while(n.right != null){
+			n.count -=1;// reduce size by 1
+			n = n.right;
+		}
+		n = n.left;
 	}
 
 	public int size(Key lo, Key high) {

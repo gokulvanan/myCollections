@@ -3,7 +3,7 @@ package org.my.collections.selection;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import org.my.collections.Compare;
+import org.my.collections.basic.Compare;
 import org.my.collections.sorting.InsertionSort;
 import org.my.collections.utils.Shuffler;
 

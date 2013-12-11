@@ -1,7 +1,8 @@
-package org.my.collections;
+package org.my.collections.basic;
 
 import java.util.EmptyStackException;
 import java.util.Iterator;
+
 
 
 /**

@@ -1,4 +1,4 @@
-package org.my.collections;
+package org.my.collections.basic;
 
 /**
  * Interface over Linked Data structure stack/queue 

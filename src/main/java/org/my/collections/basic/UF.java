@@ -1,4 +1,4 @@
-package org.my.collections;
+package org.my.collections.basic;
 
 /**
  * Simple Implementation of Union Find Algo.. (Weighted Quick Union with Path Compression);

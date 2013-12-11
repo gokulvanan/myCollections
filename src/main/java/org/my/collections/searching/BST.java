@@ -1,7 +1,7 @@
 package org.my.collections.searching;
 
-import org.my.collections.LinkedQueue;
-import org.my.collections.Queue;
+import org.my.collections.basic.LinkedQueue;
+import org.my.collections.basic.Queue;
 
 public class BST<Key extends Comparable<Key>,Value> implements OrderedOperations<Key,Value>{
 

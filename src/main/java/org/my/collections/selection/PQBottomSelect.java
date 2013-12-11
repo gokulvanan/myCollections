@@ -2,8 +2,8 @@ package org.my.collections.selection;
 
 import java.util.Iterator;
 
-import org.my.collections.PQ;
-import org.my.collections.PQ.TYPE;
+import org.my.collections.basic.PQ;
+import org.my.collections.basic.PQ.TYPE;
 
 /**
  * Class uses priority queue to filter Bottom N items from incoming stream

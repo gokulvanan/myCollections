@@ -3,9 +3,9 @@ package org.my.collections.selection;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import org.my.collections.basic.Compare;
+import org.my.collections.basic.Shuffler;
 import org.my.collections.sorting.InsertionSort;
-import org.my.collections.utils.Shuffler;
+import org.my.collections.utils.Compare;
 
 /**
  * Applies QuickSort partition concept to find k^th largest/k^th smallest element in an array

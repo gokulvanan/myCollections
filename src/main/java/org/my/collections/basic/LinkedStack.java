@@ -7,23 +7,33 @@ import java.util.Iterator;
 /**
  * Every operation takes guaranteed constant time
  * Uses extra time and space to deal with links
+ * 
  * @author Gokulvanan
  *
  */
 public class LinkedStack<Item> implements Stack<Item>, Bag<Item>{
 
+	/**
+	 * Sub Class of Linked List used to wrap over Nodes in the linked list.
+	 * Memory foot print: 40 Bytes
+	 * @author gokulvanan
+	 *
+	 * @param <T>
+	 */
 	private class Node<T>{
-		T val = null;
-		Node<T> next = null;
+								//16 Bytes Object Overhead
+								//8 Bytes Subclass overhead
+		T val = null;      		//8 Bytes pointer
+		Node<T> prev = null; 	//8 Bytes pointer
 		
 		Node(T val,Node<T> next){
 			this.val=val;
-			this.next=next;
+			this.prev=next;
 		}
 	}
 	
-	private Node<Item> first = null;
-	private int size = 0;
+	private Node<Item> first = null; // 40 + 8 (pointer)
+	private int size = 0;			 // 4 Bytes
 	
 	public void push(Item obj) {
 		first = new Node<Item>(obj,first);
@@ -32,7 +42,7 @@ public class LinkedStack<Item> implements Stack<Item>, Bag<Item>{
 	
 	public Item pop() {
 		Item output = first.val;
-		first = first.next;
+		first = first.prev;
 		size--;
 		return output;
 	}
@@ -49,6 +59,7 @@ public class LinkedStack<Item> implements Stack<Item>, Bag<Item>{
 		return new LinkedStackIterator();
 	}
 	
+	
 	private class LinkedStackIterator implements Iterator<Item>{
 		private Node<Item> ref = first;
 
@@ -58,7 +69,7 @@ public class LinkedStack<Item> implements Stack<Item>, Bag<Item>{
 
 		public Item next() {
 			Item val = ref.val;
-			ref = ref.next;
+			ref = ref.prev;
 			return val;
 		}
 

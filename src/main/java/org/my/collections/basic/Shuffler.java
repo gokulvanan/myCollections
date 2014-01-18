@@ -1,4 +1,4 @@
-package org.my.collections.utils;
+package org.my.collections.basic;
 
 import java.util.Random;
 

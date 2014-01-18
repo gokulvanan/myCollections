@@ -4,15 +4,19 @@ package org.my.collections.basic;
  * Simple Implementation of Union Find Algo.. (Weighted Quick Union with Path Compression);
  * Time to Instantiate of Object O(N)
  * Time to perform union of of 2 values O(lgN) 
- * Time to lookup if connected = O(lg*N) ~= 1
+ * Time to lookup if connected = O(lg*N) ~= constant between 1 to 5
+ * Memory Footprint:
+ * 8N + 68 (Attributes size)  + 16 (Object overhead) + 4 (Padding) = 8N + 88 <=> 8(N + 11)
+ * 
  * @author Gokulvanan
  *
  */
-public class UF {
+
+public class UF {  
 	
-	int [] data = null;
-	int [] size = null;
-	int count = 0;
+	int [] data = null; // 4N + 24 + 8 (Pointer ref)
+	int [] size = null; // 4N + 24 + 8 (Pointer ref)
+	int count = 0;		// 4
 	
 	/**
 	 * Initialize data structure
@@ -34,10 +38,10 @@ public class UF {
 	 * @param q
 	 * @throws Exception
 	 */
-	public void union (int p, int q) throws Exception{
+	public void union (int p, int q) {
 		int rootP = parent(p);
 		int rootQ = parent(q);
-		if(rootP == rootQ) throw new Exception("The elements are already connected");
+		if(rootP == rootQ) throw new RuntimeException("The elements are already connected");
 		if(size[rootP] > size[rootQ]) 	{ data[rootQ] = data[rootP]; size[rootP] += size[rootQ];}
 		else 							{ data[rootP] = data[rootQ]; size[rootQ] += size[rootP];}
 		count --;// no of components reduces for every union operation

@@ -8,7 +8,10 @@ import java.util.Iterator;
 /**
  * 
  * @author Gokulvanan
- *
+ * 
+ * Linked list implementation of Dynamic queue.
+ * Has constant fixed time and space requirements in each operation
+ * Use when size of queue is unknown.. and frequent toggles are expected
  * @param <Item>
  */
 public class LinkedQueue<Item> implements Queue<Item>, Bag<Item> {

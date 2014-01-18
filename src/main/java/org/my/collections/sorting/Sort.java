@@ -2,7 +2,7 @@ package org.my.collections.sorting;
 
 import java.util.Comparator;
 
-import org.my.collections.basic.Compare;
+import org.my.collections.utils.Compare;
 
 /**
  * Parent Class that encapsulates all sorting classes

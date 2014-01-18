@@ -1,5 +1,7 @@
 package org.my.collections.utils;
 
+import org.my.collections.basic.Shuffler;
+
 public class SortUtils {
 
 	public static boolean isSorted(Comparable[] c){

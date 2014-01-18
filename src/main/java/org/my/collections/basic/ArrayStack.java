@@ -5,17 +5,19 @@ import java.util.Iterator;
 
 
 /**
+ * Resizing array implementation of Stack
  * Every operation takes constant amortized time
  * Less wasted space compared to Linked version
  * Resizing Strategy - double on full  half on 1/4 full
  * @author Gokulvanan
  *
  */
-public class ArrayStack<Item> implements Stack<Item>{
+public class ArrayStack<Item> implements Stack<Item>, Bag<Item>{
 
 	private Item [] data = null;
 	private int pointer = 0;
 	
+	@SuppressWarnings("unchecked")
 	public ArrayStack(int N){
 		data = (Item[]) new Object[N];
 	}
@@ -73,5 +75,10 @@ public class ArrayStack<Item> implements Stack<Item>{
 			throw new UnsupportedOperationException(" Not implemented yet");
 		}
 		
+	}
+
+	@Override
+	public void add(Item x) {
+		push(x);
 	}
 }

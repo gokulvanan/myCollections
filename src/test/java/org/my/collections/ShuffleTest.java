@@ -4,7 +4,7 @@ import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-import org.my.collections.utils.Shuffler;
+import org.my.collections.basic.Shuffler;
 import org.my.collections.utils.SortUtils;
 
 public class ShuffleTest extends TestCase{

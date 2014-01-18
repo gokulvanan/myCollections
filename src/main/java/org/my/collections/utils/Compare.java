@@ -1,4 +1,4 @@
-package org.my.collections.basic;
+package org.my.collections.utils;
 
 import java.util.Comparator;
 

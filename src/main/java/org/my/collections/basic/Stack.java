@@ -2,6 +2,7 @@ package org.my.collections.basic;
 
 /**
  * 
+ * Datastructure that implements LIFO logic
  * @author Gokulvanan
  *
  * @param <Item>

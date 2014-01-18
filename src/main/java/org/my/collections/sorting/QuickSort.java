@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.my.collections.utils.Shuffler;
+import org.my.collections.basic.Shuffler;
 
 /**
  * InPlace sort - no extra space
